@@ -6,25 +6,6 @@
     <title>Sistem Informasi Perpustakaan - ASTOA</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
 
@@ -55,56 +36,43 @@
         <!-- ================= 1. HALAMAN LOGIN ================= -->
         <section id="page-login" class="bg-slate-800 border border-slate-700 rounded-2xl p-6 sm:p-8 shadow-2xl max-w-md mx-auto my-8">
             <div class="text-center mb-6">
-                <div class="inline-block p-3 bg-blue-600/10 rounded-full mb-3 text-blue-400">
+                <div class="inline-block p-3 bg-blue-600/15 rounded-full mb-3 text-blue-400">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                     </svg>
                 </div>
-                <h2 class="text-xl font-bold">Silakan masuk ke akun Anda</h2>
-                <p class="text-xs text-slate-400 mt-1">Gunakan NIS Siswa atau ID Admin untuk masuk</p>
+                <h2 class="text-xl font-bold">Silkan masuk ke akun Anda</h2>
+                <p class="text-xs text-slate-400 mt-1">Sistem Informasi Perpustakaan (ASTOA)</p>
             </div>
 
             <!-- Pesan Error Login -->
-            <div id="login-error" class="hidden mb-4 p-3 bg-red-950/80 border border-red-700 text-red-300 text-xs rounded-xl flex items-center space-x-2">
-                <span>⚠️ <b>Login Gagal:</b> Username / NIS tidak ditemukan!</span>
+            <div id="login-error" class="hidden mb-4 p-3 bg-red-950/90 border border-red-700 text-red-300 text-xs rounded-xl flex items-center space-x-2">
+                <span>⚠️ <b>Login Gagal:</b> Username atau Password Salah!</span>
             </div>
 
             <form id="form-login" onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Username / NIS Anggota</label>
-                    <input type="text" id="login-input" placeholder="Contoh: 1001 atau admin" required
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Username / ID Anggota</label>
+                    <input type="text" id="login-input" placeholder="Masukkan username atau ID..." required
                         class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Password</label>
-                    <input type="password" id="password" value="12345" required
+                    <input type="password" id="password" placeholder="••••••••••••" value="12345" required
                         class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition">
                 </div>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl transition shadow-lg text-sm tracking-wide">
+                <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2.5 rounded-xl transition shadow-lg text-sm tracking-wide">
                     MASUK KE SISTEM
                 </button>
             </form>
             
-            <!-- Panduan Pengujian Akun -->
-            <div class="mt-6 p-4 bg-slate-900/80 border border-slate-700/80 rounded-xl text-xs space-y-2 text-slate-300">
-                <p class="font-bold text-blue-400 border-b border-slate-800 pb-1">💡 Petunjuk Login (Sesuai LKPD):</p>
-                <div class="grid grid-cols-2 gap-2 text-[11px]">
-                    <div>
-                        <span class="text-slate-400 block">Akses Admin:</span>
-                        <code class="text-yellow-400 bg-slate-800 px-1.5 py-0.5 rounded">admin</code>
-                    </div>
-                    <div>
-                        <span class="text-slate-400 block">Akses Siswa (Dewi):</span>
-                        <code class="text-yellow-400 bg-slate-800 px-1.5 py-0.5 rounded">1001</code>
-                    </div>
-                    <div>
-                        <span class="text-slate-400 block">Akses Siswa (Ahmad):</span>
-                        <code class="text-yellow-400 bg-slate-800 px-1.5 py-0.5 rounded">1002</code>
-                    </div>
-                    <div>
-                        <span class="text-slate-400 block">Password:</span>
-                        <span class="text-slate-400">Bebas/Sembarang</span>
-                    </div>
+            <!-- PETUNJUK LOGIN SESUAI LKPD (MUNCUL KEMBALI) -->
+            <div class="mt-6 p-4 bg-slate-900 border border-slate-700 rounded-xl text-xs space-y-2 text-slate-300">
+                <p class="font-bold text-blue-400 border-b border-slate-800 pb-1">💡 Petunjuk Login Sesuai LKPD[cite: 1]:</p>
+                <div class="space-y-1 text-[11px]">
+                    <p>• <b>Admin / Petugas:</b> Ketik <code class="text-yellow-400 bg-slate-800 px-1 py-0.5 rounded">admin</code></p>
+                    <p>• <b>Siswa (Dewi Lusiana):</b> Ketik NIS <code class="text-yellow-400 bg-slate-800 px-1 py-0.5 rounded">1001</code>[cite: 1]</p>
+                    <p>• <b>Siswa (Ahmad Fauzi):</b> Ketik NIS <code class="text-yellow-400 bg-slate-800 px-1 py-0.5 rounded">1002</code>[cite: 1]</p>
                 </div>
             </div>
         </section>
@@ -135,15 +103,15 @@
             <div id="tab-content-katalog" class="tab-content space-y-4">
                 <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
-                        <h2 class="text-base font-bold">Katalog Buku Perpustakaan</h2>
+                        <h2 class="text-base font-bold">Cari Katalog Buku</h2>
                         <button onclick="openModalBuku()" class="admin-only bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition">
-                            + Tambah Buku Baru
+                            + Tambah Buku (Create)
                         </button>
                     </div>
 
                     <!-- Pencarian Buku -->
                     <div class="mb-4">
-                        <input type="text" id="search-buku" oninput="renderKatalog()" placeholder="Cari judul buku, pengarang, atau kode..." 
+                        <input type="text" id="search-buku" oninput="renderKatalog()" placeholder="Cari judul buku, pengarang, atau kategori..." 
                             class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-blue-500">
                     </div>
 
@@ -157,18 +125,18 @@
             <!-- TAB 2: TRANSAKSI PEMINJAMAN -->
             <div id="tab-content-pinjaman" class="tab-content hidden space-y-4">
                 <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
-                    <h2 class="text-base font-bold mb-4">Form Transaksi Peminjaman Buku</h2>
+                    <h2 class="text-base font-bold mb-4">Form Peminjaman Buku (Cek Stok)</h2>
                     
                     <form onsubmit="handleProsesPinjam(event)" class="space-y-4 max-w-xl">
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1">Pilih Anggota / Siswa (`id_user`)</label>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">ID Anggota / NIS (`id_user`)</label>
                             <select id="pinjam-user" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200">
                                 <!-- Data diisi oleh JS -->
                             </select>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1">Pilih Buku (`id_buku`)</label>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Kode Buku (`id_buku`)</label>
                             <select id="pinjam-buku" onchange="updateStokPreview()" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200">
                                 <!-- Data diisi oleh JS -->
                             </select>
@@ -177,23 +145,23 @@
 
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1">Tanggal Pinjam</label>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1">Tanggal Pinjam (`tgl_pinjam`)</label>
                                 <input type="date" id="pinjam-tgl" required onchange="autoSetJatuhTempo()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1">Jatuh Tempo (+7 Hari)</label>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1">Jatuh Tempo (`tgl_jatuh_tempo`)</label>
                                 <input type="date" id="pinjam-tempo" required readonly class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-400">
                             </div>
                         </div>
 
                         <div class="p-3 bg-blue-950/40 border border-blue-800/50 rounded-lg text-xs text-blue-300">
-                            ℹ️ Sistem akan memotong stok buku secara otomatis (`stok = stok - 1`) setelah transaksi disimpan.
+                            ℹ️ Sistem akan memotong stok otomatis: (stok = stok - 1)[cite: 1]
                         </div>
 
-                        <button type="submit" class="admin-only bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition">
+                        <button type="submit" class="admin-only w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2.5 rounded-lg text-sm transition">
                             💾 SIMPAN TRANSAKSI & CETAK BUKTI PINJAM
                         </button>
-                        <p class="siswa-only text-xs text-yellow-500 italic">⚠️ Pencatatan transaksi hanya dapat dilakukan oleh Admin.</p>
+                        <p class="siswa-only text-xs text-yellow-500 italic text-center">⚠️ Transaksi peminjaman hanya dapat diproses oleh Admin[cite: 1].</p>
                     </form>
                 </div>
             </div>
@@ -201,30 +169,30 @@
             <!-- TAB 3: PENGEMBALIAN BUKU & DENDA -->
             <div id="tab-content-pengembalian" class="tab-content hidden space-y-4">
                 <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
-                    <h2 class="text-base font-bold mb-4">Proses Pengembalian & Kalkulasi Denda</h2>
+                    <h2 class="text-base font-bold mb-4">Form Pengembalian & Kalkulasi Denda</h2>
 
                     <div class="space-y-4 max-w-xl">
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1">Pilih Kode Transaksi Peminjaman Aktif</label>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Kode Transaksi / ID Siswa</label>
                             <select id="kembali-trx" onchange="kalkulasiDendaRealtime()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200">
                                 <!-- Data diisi oleh JS -->
                             </select>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1">Tanggal Pengembalian Hari Ini</label>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Tanggal Kembali</label>
                             <input type="date" id="kembali-tgl" onchange="kalkulasiDendaRealtime()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200">
                         </div>
 
-                        <!-- Panel Hasil Kalkulasi Denda Otomatis -->
+                        <!-- Panel Hasil Kalkulasi Denda -->
                         <div id="panel-denda" class="p-4 rounded-xl border transition">
                             <!-- Hasil diisi JS -->
                         </div>
 
-                        <button onclick="prosesPengembalianBuku()" class="admin-only w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-lg text-sm transition shadow-lg">
+                        <button onclick="prosesPengembalianBuku()" class="admin-only w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-lg text-sm transition shadow-lg">
                             ✔ UPDATE STATUS & SIMPAN PEMBAYARAN DENDA
                         </button>
-                        <p class="siswa-only text-xs text-yellow-500 italic">⚠️ Proses pengembalian buku hanya dapat dilakukan oleh Admin.</p>
+                        <p class="siswa-only text-xs text-yellow-500 italic text-center">⚠️ Proses pengembalian hanya dapat dilakukan oleh Admin[cite: 1].</p>
                     </div>
                 </div>
             </div>
@@ -233,7 +201,7 @@
             <div id="tab-content-anggota" class="tab-content hidden space-y-4">
                 <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
                     <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-base font-bold">Data Master Anggota (`tbl-user`)</h2>
+                        <h2 class="text-base font-bold">Data Master Anggota (`tbl-user`)[cite: 1]</h2>
                         <button onclick="openModalAnggota()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition">
                             + Tambah Anggota
                         </button>
@@ -263,9 +231,9 @@
             <div id="tab-content-laporan" class="tab-content hidden space-y-4">
                 <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl space-y-6">
                     <div class="flex justify-between items-center">
-                        <h2 class="text-base font-bold">Laporan Rekapitulasi Perpustakaan</h2>
-                        <button onclick="window.print()" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg text-xs font-semibold transition">
-                            🖨️ Cetak Laporan PDF
+                        <h2 class="text-base font-bold">ASTOA PERPUSTAKAAN - LAPORAN & REKAP DENDA</h2>
+                        <button onclick="window.print()" class="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-lg text-xs font-semibold transition">
+                            🖨️ Cetak PDF / Laporan
                         </button>
                     </div>
 
@@ -273,38 +241,15 @@
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
                             <span class="text-xs text-slate-400 block">Total Peminjaman</span>
-                            <span id="stat-total-pinjam" class="text-2xl font-extrabold text-blue-400">0</span> Transaksi
+                            <span id="stat-total-pinjam" class="text-xl font-extrabold text-slate-100">0</span> Transaksi
                         </div>
                         <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
                             <span class="text-xs text-slate-400 block">Total Pengembalian</span>
-                            <span id="stat-total-kembali" class="text-2xl font-extrabold text-green-400">0</span> Transaksi
+                            <span id="stat-total-kembali" class="text-xl font-extrabold text-slate-100">0</span> Transaksi
                         </div>
-                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
-                            <span class="text-xs text-slate-400 block">Total Denda Terkumpul</span>
-                            <span id="stat-total-denda" class="text-2xl font-extrabold text-red-400">Rp 0</span>
-                        </div>
-                    </div>
-
-                    <!-- Tabel Riwayat Semua Transaksi -->
-                    <div>
-                        <h3 class="text-sm font-semibold mb-2 text-slate-300">Riwayat Transaksi Terakhir</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-xs border-collapse">
-                                <thead>
-                                    <tr class="bg-slate-900 border-b border-slate-700 text-slate-400">
-                                        <th class="p-2.5">Kode Trx</th>
-                                        <th class="p-2.5">Anggota</th>
-                                        <th class="p-2.5">Buku</th>
-                                        <th class="p-2.5">Tgl Pinjam</th>
-                                        <th class="p-2.5">Jatuh Tempo</th>
-                                        <th class="p-2.5">Tgl Kembali</th>
-                                        <th class="p-2.5">Denda</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table-riwayat-body" class="divide-y divide-slate-700/50">
-                                    <!-- Data diisi JS -->
-                                </tbody>
-                            </table>
+                        <div class="bg-slate-900 p-4 rounded-xl border border-red-800/60 bg-red-950/20">
+                            <span class="text-xs text-red-400 block">Total Denda Terkumpul</span>
+                            <span id="stat-total-denda" class="text-xl font-extrabold text-red-400">Rp 0</span>
                         </div>
                     </div>
                 </div>
@@ -332,7 +277,7 @@
                 </div>
                 <div class="flex justify-end gap-2 pt-2">
                     <button type="button" onclick="closeModalAnggota()" class="px-4 py-2 bg-slate-700 rounded-lg text-xs font-semibold">Batal</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-xs font-semibold">Simpan Anggota</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-xs font-semibold">Simpan</button>
                 </div>
             </form>
         </div>
@@ -345,7 +290,7 @@
             <form onsubmit="handleTambahBuku(event)" class="space-y-3">
                 <div>
                     <label class="block text-xs font-semibold text-slate-400 mb-1">Kode Buku</label>
-                    <input type="text" id="add-kode-buku" placeholder="BK-003" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm">
+                    <input type="text" id="add-kode-buku" value="BK-003" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-slate-400 mb-1">Judul Buku</label>
@@ -367,7 +312,7 @@
                 </div>
                 <div class="flex justify-end gap-2 pt-2">
                     <button type="button" onclick="closeModalBuku()" class="px-4 py-2 bg-slate-700 rounded-lg text-xs font-semibold">Batal</button>
-                    <button type="submit" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg text-xs font-semibold">Simpan Buku</button>
+                    <button type="submit" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg text-xs font-semibold">Simpan</button>
                 </div>
             </form>
         </div>
@@ -375,16 +320,15 @@
 
     <!-- Footer -->
     <footer class="text-center py-4 text-xs text-slate-500 border-t border-slate-800 mt-8">
-        LKPD Sistem Informasi Perpustakaan &copy; 2026 - Dewi Lusiana (XII RPL 3)
+        LKPD Sistem Informasi Perpustakaan &copy; 2026 - Dewi Lusiana (XII RPL 3)[cite: 1]
     </footer>
 
     <!-- LOGIKA JAVASCRIPT APLIKASI -->
     <script>
-        // ================= DATABASE SIMULASI (Sesuai Struktur Tabel LKPD Aktivitas 7) =================
         let dbUser = [
             { id_user: 1, nama_lengkap: "Dewi Lusiana", NIS: "1001", no_hp: "08123456789", role: "Siswa" },
             { id_user: 2, nama_lengkap: "Ahmad Fauzi", NIS: "1002", no_hp: "08987654321", role: "Siswa" },
-            { id_user: 99, nama_lengkap: "Petugas Admin", NIS: "admin", no_hp: "08000000000", role: "Admin" }
+            { id_user: 99, nama_lengkap: "Administrator Perpus", NIS: "admin", no_hp: "08000000000", role: "Admin" }
         ];
 
         let dbBuku = [
@@ -407,29 +351,24 @@
 
         let currentUser = null;
 
-        // --- SISTEM AUTHENTIKASI / LOGIN ---
         function handleLogin(e) {
             e.preventDefault();
             const inputVal = document.getElementById('login-input').value.trim().toLowerCase();
             const errorBox = document.getElementById('login-error');
 
-            // Pencarian Pengguna Berdasarkan NIS atau Username Admin
-            const foundUser = dbUser.find(u => u.NIS.toLowerCase() === inputVal || u.nama_lengkap.toLowerCase() === inputVal);
+            const foundUser = dbUser.find(u => u.NIS.toLowerCase() === inputVal || u.nama_lengkap.toLowerCase().includes(inputVal));
 
             if (foundUser) {
                 currentUser = foundUser;
                 errorBox.classList.add('hidden');
                 
-                // Switch tampilan halaman
                 document.getElementById('page-login').classList.add('hidden');
                 document.getElementById('page-dashboard').classList.remove('hidden');
                 document.getElementById('nav-user-info').classList.remove('hidden');
 
-                // Render Info Header
                 document.getElementById('current-name').innerText = currentUser.nama_lengkap;
                 document.getElementById('current-role-badge').innerText = currentUser.role;
 
-                // Atur Proteksi Role Akses
                 if (currentUser.role === 'Siswa') {
                     document.querySelectorAll('.admin-only').forEach(el => el.classList.add('hidden'));
                     document.querySelectorAll('.siswa-only').forEach(el => el.classList.remove('hidden'));
@@ -438,13 +377,11 @@
                     document.querySelectorAll('.siswa-only').forEach(el => el.classList.add('hidden'));
                 }
 
-                // Inisialisasi Data Tampilan
                 initDropdowns();
                 renderKatalog();
                 renderTabelAnggota();
                 renderTabelLaporan();
                 
-                // Set Default Tanggal Pinjam Hari Ini
                 const today = new Date().toISOString().split('T')[0];
                 document.getElementById('pinjam-tgl').value = today;
                 document.getElementById('kembali-tgl').value = today;
@@ -462,12 +399,10 @@
             document.getElementById('login-input').value = '';
         }
 
-        // --- MANAJEMEN TAB ---
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById(`tab-content-${tabName}`).classList.remove('hidden');
             
-            // Highlight Button Active
             ['katalog', 'pinjaman', 'pengembalian', 'anggota', 'laporan'].forEach(t => {
                 const btn = document.getElementById(`tab-btn-${t}`);
                 if (btn) {
@@ -482,7 +417,6 @@
             if (tabName === 'pengembalian') kalkulasiDendaRealtime();
         }
 
-        // --- RENDER KATALOG BUKU ---
         function renderKatalog() {
             const keyword = document.getElementById('search-buku').value.toLowerCase();
             const container = document.getElementById('container-katalog');
@@ -491,7 +425,7 @@
             const filtered = dbBuku.filter(b => 
                 b.judul_buku.toLowerCase().includes(keyword) || 
                 b.pengarang.toLowerCase().includes(keyword) ||
-                b.kode_buku.toLowerCase().includes(keyword)
+                b.kategori.toLowerCase().includes(keyword)
             );
 
             if (filtered.length === 0) {
@@ -510,14 +444,10 @@
                 container.innerHTML += `
                     <div class="bg-slate-900 border border-slate-700 p-4 rounded-xl flex justify-between flex-col">
                         <div>
-                            <div class="flex justify-between items-start">
-                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">${buku.kode_buku}</span>
-                                <span class="text-[10px] bg-slate-800 border border-slate-700 px-2 py-0.5 rounded text-slate-300">${buku.kategori}</span>
-                            </div>
-                            <h3 class="font-bold text-sm text-slate-100 mt-1">${buku.judul_buku}</h3>
-                            <p class="text-xs text-slate-400 mt-0.5">Pengarang: ${buku.pengarang} (${buku.tahun_terbit})</p>
+                            <h3 class="font-bold text-sm text-slate-100">${buku.judul_buku}</h3>
+                            <p class="text-xs text-slate-400 mt-1">Pengarang: ${buku.pengarang} | Kategori: ${buku.kategori}</p>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-slate-800/80 flex justify-between items-center">
+                        <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center">
                             <span class="inline-block border px-2.5 py-1 rounded-lg text-xs font-semibold ${badgeClass}">
                                 ${badgeText}
                             </span>
@@ -527,29 +457,25 @@
             });
         }
 
-        // --- TRANSAKSI PEMINJAMAN BUKU ---
         function autoSetJatuhTempo() {
             const tglPinjamVal = document.getElementById('pinjam-tgl').value;
             if(!tglPinjamVal) return;
-
             const d = new Date(tglPinjamVal);
-            d.setDate(d.getDate() + 7); // Jatuh tempo otomatis +7 hari
+            d.setDate(d.getDate() + 7);
             document.getElementById('pinjam-tempo').value = d.toISOString().split('T')[0];
         }
 
         function initDropdowns() {
-            // Dropdown Siswa
             const selectUser = document.getElementById('pinjam-user');
             selectUser.innerHTML = '';
             dbUser.filter(u => u.role === 'Siswa').forEach(siswa => {
-                selectUser.innerHTML += `<option value="${siswa.id_user}">${siswa.NIS} - ${siswa.nama_lengkap}</option>`;
+                selectUser.innerHTML += `<option value="${siswa.id_user}">USR-00${siswa.id_user} (${siswa.nama_lengkap})</option>`;
             });
 
-            // Dropdown Buku
             const selectBuku = document.getElementById('pinjam-buku');
             selectBuku.innerHTML = '';
             dbBuku.forEach(buku => {
-                selectBuku.innerHTML += `<option value="${buku.id_buku}">${buku.kode_buku} - ${buku.judul_buku} (Stok: ${buku.stok})</option>`;
+                selectBuku.innerHTML += `<option value="${buku.id_buku}">${buku.kode_buku} (${buku.judul_buku})</option>`;
             });
 
             updateStokPreview();
@@ -560,15 +486,8 @@
             const idBuku = parseInt(document.getElementById('pinjam-buku').value);
             const buku = dbBuku.find(b => b.id_buku === idBuku);
             const preview = document.getElementById('stok-preview');
-            
             if(buku) {
-                if(buku.stok > 0) {
-                    preview.innerText = `✓ Stok Tersedia: ${buku.stok} Ekslempar`;
-                    preview.className = "text-xs text-green-400 mt-1 font-semibold";
-                } else {
-                    preview.innerText = `❌ Stok Habis! Buku tidak dapat dipinjam.`;
-                    preview.className = "text-xs text-red-400 mt-1 font-semibold";
-                }
+                preview.innerText = `✓ Stok Buku Tersedia: ${buku.stok} Ekslempar (Stok > 0)`;
             }
         }
 
@@ -581,14 +500,11 @@
 
             const buku = dbBuku.find(b => b.id_buku === idBuku);
             if (!buku || buku.stok <= 0) {
-                alert("Stok buku habis! Transaksi peminjaman tidak dapat diproses.");
+                alert("Stok buku habis!");
                 return;
             }
 
-            // 1. Kurangi Stok
             buku.stok -= 1;
-
-            // 2. Simpan Transaksi Baru
             const trxBaru = {
                 id_peminjaman: dbPeminjaman.length + 1,
                 kode_transaksi: `TRX-${Date.now().toString().slice(-6)}`,
@@ -601,29 +517,22 @@
             };
 
             dbPeminjaman.push(trxBaru);
-
-            alert(`✅ Transaksi ${trxBaru.kode_transaksi} Berhasil Disimpan!\nStok buku berkurang menjadi: ${buku.stok}`);
-            
-            // Refresh
+            alert(`✅ Transaksi Berhasil! Stok buku otomatis berkurang (stok = stok - 1)[cite: 1].`);
             initDropdowns();
             renderKatalog();
             renderTabelLaporan();
         }
 
-        // --- TRANSAKSI PENGEMBALIAN & DENDA ---
         function initDropdownPengembalian() {
             const selectTrx = document.getElementById('kembali-trx');
             selectTrx.innerHTML = '';
-
             const trxAktif = dbPeminjaman.filter(t => t.tgl_kembali === null);
 
             if (trxAktif.length === 0) {
-                selectTrx.innerHTML = `<option value="">-- Tidak Ada Transaksi Dipinjam --</option>`;
+                selectTrx.innerHTML = `<option value="">-- Tidak ada transaksi aktif --</option>`;
             } else {
                 trxAktif.forEach(t => {
-                    const usr = dbUser.find(u => u.id_user === t.id_user);
-                    const bk = dbBuku.find(b => b.id_buku === t.id_buku);
-                    selectTrx.innerHTML += `<option value="${t.id_peminjaman}">${t.kode_transaksi} | ${usr ? usr.nama_lengkap : 'Siswa'} - ${bk ? bk.judul_buku : 'Buku'}</option>`;
+                    selectTrx.innerHTML += `<option value="${t.id_peminjaman}">${t.kode_transaksi}</option>`;
                 });
             }
         }
@@ -632,29 +541,25 @@
             const idTrx = parseInt(document.getElementById('kembali-trx').value);
             const tglKembaliVal = document.getElementById('kembali-tgl').value;
             const panel = document.getElementById('panel-denda');
-
             const trx = dbPeminjaman.find(t => t.id_peminjaman === idTrx);
 
             if (!trx || !tglKembaliVal) {
                 panel.className = "p-4 rounded-xl border border-slate-700 bg-slate-900 text-xs text-slate-400";
-                panel.innerHTML = "Pilih transaksi yang valid untuk menghitung kalkulasi denda.";
+                panel.innerHTML = "Silakan pilih data transaksi pengembalian.";
                 return;
             }
 
             const tglTempo = new Date(trx.tgl_jatuh_tempo);
             const tglKembali = new Date(tglKembaliVal);
-
-            // Hitung Selisih Hari
-            const diffTime = tglKembali - tglTempo;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const diffDays = Math.ceil((tglKembali - tglTempo) / (1000 * 60 * 60 * 24));
 
             if (diffDays > 0) {
-                const totalDenda = diffDays * 1000; // Rp 1.000 per hari
+                const totalDenda = diffDays * 1000;
                 panel.className = "p-4 rounded-xl border border-red-800 bg-red-950/80 flex justify-between items-center";
                 panel.innerHTML = `
                     <div>
                         <p class="text-xs font-bold text-red-400">⚠️ Status Keterlambatan: TERLAMBAT (${diffDays} Hari)</p>
-                        <p class="text-[11px] text-slate-400 mt-0.5">Rumus: Selisih Hari (${diffDays}) × Rp 1.000/Hari</p>
+                        <p class="text-[11px] text-slate-400">Rumus: Selisih Hari (${diffDays}) × Tarif Denda/Hari (Rp 1.000)</p>
                     </div>
                     <div class="text-lg font-black text-red-300">Rp ${totalDenda.toLocaleString('id-ID')}</div>
                 `;
@@ -663,7 +568,7 @@
                 panel.innerHTML = `
                     <div>
                         <p class="text-xs font-bold text-green-400">✓ Status: TEPAT WAKTU</p>
-                        <p class="text-[11px] text-slate-400 mt-0.5">Pengembalian dilakukan sebelum atau pada tanggal jatuh tempo.</p>
+                        <p class="text-[11px] text-slate-400">Tidak ada denda keterlambatan.</p>
                     </div>
                     <div class="text-lg font-black text-green-300">Rp 0</div>
                 `;
@@ -673,39 +578,25 @@
         function prosesPengembalianBuku() {
             const idTrx = parseInt(document.getElementById('kembali-trx').value);
             const tglKembaliVal = document.getElementById('kembali-tgl').value;
-
             const trx = dbPeminjaman.find(t => t.id_peminjaman === idTrx);
-            if (!trx) {
-                alert("Pilih transaksi terlebih dahulu!");
-                return;
-            }
+            if (!trx) return;
 
-            const tglTempo = new Date(trx.tgl_jatuh_tempo);
-            const tglKembali = new Date(tglKembaliVal);
-            const diffTime = tglKembali - tglTempo;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            const totalDenda = diffDays > 0 ? diffDays * 1000 : 0;
-
-            // Update Transaksi
+            const diffDays = Math.ceil((new Date(tglKembaliVal) - new Date(trx.tgl_jatuh_tempo)) / (1000 * 60 * 60 * 24));
             trx.tgl_kembali = tglKembaliVal;
-            trx.denda = totalDenda;
+            trx.denda = diffDays > 0 ? diffDays * 1000 : 0;
 
-            // Tambahkan kembali stok buku (+1)
             const buku = dbBuku.find(b => b.id_buku === trx.id_buku);
             if (buku) buku.stok += 1;
 
-            alert(`✅ Transaksi Pengembalian Selesai!\nStok buku bertambah (+1).\nDenda dibayar: Rp ${totalDenda.toLocaleString('id-ID')}`);
-
+            alert("✅ Status Berhasil Diperbarui & Pembayaran Denda Disimpan!");
             initDropdowns();
             renderKatalog();
             renderTabelLaporan();
         }
 
-        // --- KELOLA DATA ANGGOTA (ADMIN) ---
         function renderTabelAnggota() {
             const tbody = document.getElementById('table-anggota-body');
             tbody.innerHTML = '';
-
             dbUser.forEach(usr => {
                 tbody.innerHTML += `
                     <tr class="hover:bg-slate-800/50">
@@ -727,94 +618,46 @@
 
         function handleTambahAnggota(e) {
             e.preventDefault();
-            const nama = document.getElementById('add-nama').value;
-            const nis = document.getElementById('add-nis').value;
-            const hp = document.getElementById('add-hp').value;
-
-            const newAnggota = {
+            dbUser.push({
                 id_user: dbUser.length + 1,
-                nama_lengkap: nama,
-                NIS: nis,
-                no_hp: hp,
+                nama_lengkap: document.getElementById('add-nama').value,
+                NIS: document.getElementById('add-nis').value,
+                no_hp: document.getElementById('add-hp').value,
                 role: 'Siswa'
-            };
-
-            dbUser.push(newAnggota);
-            alert(`Anggota Baru (${nama}) dengan NIS [${nis}] berhasil ditambahkan!\nBisa langsung dipakai untuk Login.`);
-
+            });
+            alert("Anggota berhasil ditambahkan dan langsung bisa digunakan untuk login!");
             closeModalAnggota();
             renderTabelAnggota();
             initDropdowns();
         }
 
-        function hapusAnggota(id) {
-            if(confirm("Yakin ingin menghapus anggota ini?")) {
-                dbUser = dbUser.filter(u => u.id_user !== id);
-                renderTabelAnggota();
-                initDropdowns();
-            }
-        }
-
-        // --- KELOLA BUKU ---
         function openModalBuku() { document.getElementById('modal-buku').classList.remove('hidden'); }
         function closeModalBuku() { document.getElementById('modal-buku').classList.add('hidden'); }
 
         function handleTambahBuku(e) {
             e.preventDefault();
-            const kode = document.getElementById('add-kode-buku').value;
-            const judul = document.getElementById('add-judul-buku').value;
-            const pengarang = document.getElementById('add-pengarang').value;
-            const kategori = document.getElementById('add-kategori').value;
-            const stok = parseInt(document.getElementById('add-stok').value);
-
             dbBuku.push({
                 id_buku: dbBuku.length + 1,
-                kode_buku: kode,
-                judul_buku: judul,
-                pengarang: pengarang,
-                kategori: kategori,
+                kode_buku: document.getElementById('add-kode-buku').value,
+                judul_buku: document.getElementById('add-judul-buku').value,
+                pengarang: document.getElementById('add-pengarang').value,
+                kategori: document.getElementById('add-kategori').value,
                 tahun_terbit: "2026",
-                stok: stok
+                stok: parseInt(document.getElementById('add-stok').value)
             });
-
-            alert("Buku Baru Berhasil Ditambahkan ke Katalog!");
+            alert("Buku berhasil ditambahkan ke katalog!");
             closeModalBuku();
             renderKatalog();
             initDropdowns();
         }
 
-        // --- LAPORAN REKAPITULASI ---
         function renderTabelLaporan() {
-            const tbody = document.getElementById('table-riwayat-body');
-            tbody.innerHTML = '';
-
             let totalPinjam = dbPeminjaman.length;
-            let totalKembali = 0;
-            let totalDenda = 0;
+            let totalKembali = dbPeminjaman.filter(t => t.tgl_kembali !== null).length;
+            let totalDenda = dbPeminjaman.reduce((acc, curr) => acc + curr.denda, 0);
 
-            dbPeminjaman.forEach(trx => {
-                const usr = dbUser.find(u => u.id_user === trx.id_user);
-                const bk = dbBuku.find(b => b.id_buku === trx.id_buku);
-
-                if (trx.tgl_kembali !== null) totalKembali++;
-                totalDenda += trx.denda;
-
-                tbody.innerHTML += `
-                    <tr class="hover:bg-slate-800/50">
-                        <td class="p-2.5 font-mono text-blue-400">${trx.kode_transaksi}</td>
-                        <td class="p-2.5 font-semibold">${usr ? usr.nama_lengkap : '-'}</td>
-                        <td class="p-2.5">${bk ? bk.judul_buku : '-'}</td>
-                        <td class="p-2.5 text-slate-400">${trx.tgl_pinjam}</td>
-                        <td class="p-2.5 text-slate-400">${trx.tgl_jatuh_tempo}</td>
-                        <td class="p-2.5">${trx.tgl_kembali ? `<span class="text-green-400">${trx.tgl_kembali}</span>` : '<span class="text-yellow-500">Dipinjam</span>'}</td>
-                        <td class="p-2.5 font-bold ${trx.denda > 0 ? 'text-red-400' : 'text-slate-400'}">Rp ${trx.denda.toLocaleString('id-ID')}</td>
-                    </tr>
-                `;
-            });
-
-            // Update Statistik
-            document.getElementById('stat-total-pinjam').innerText = totalPinjam;
-            document.getElementById('stat-total-kembali').innerText = totalKembali;
+            document.getElementById('stat-total-pinjam').innerText = `${totalPinjam} Transaksi`;
+            document.getElementById('stat-total-kembali').innerText = `${totalKembali} Transaksi`;
             document.getElementById('stat-total-denda').innerText = `Rp ${totalDenda.toLocaleString('id-ID')}`;
         }
     </script>
