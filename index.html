@@ -75,10 +75,10 @@
                 <button onclick="switchTab('katalog')" id="tab-btn-katalog" class="px-4 py-2 rounded-lg text-xs font-bold bg-blue-600 text-white transition">
                     📖 Katalog Buku
                 </button>
-                <button onclick="switchTab('pinjaman')" id="tab-btn-pinjaman" class="px-4 py-2 rounded-lg text-xs font-bold bg-slate-800 text-slate-400 hover:bg-slate-700 transition">
+                <button onclick="switchTab('pinjaman')" id="tab-btn-pinjaman" class="admin-only px-4 py-2 rounded-lg text-xs font-bold bg-slate-800 text-slate-400 hover:bg-slate-700 transition">
                     🔄 Transaksi Peminjaman
                 </button>
-                <button onclick="switchTab('pengembalian')" id="tab-btn-pengembalian" class="px-4 py-2 rounded-lg text-xs font-bold bg-slate-800 text-slate-400 hover:bg-slate-700 transition">
+                <button onclick="switchTab('pengembalian')" id="tab-btn-pengembalian" class="admin-only px-4 py-2 rounded-lg text-xs font-bold bg-slate-800 text-slate-400 hover:bg-slate-700 transition">
                     💰 Pengembalian & Denda
                 </button>
                 <button onclick="switchTab('anggota')" id="tab-btn-anggota" class="admin-only px-4 py-2 rounded-lg text-xs font-bold bg-slate-800 text-slate-400 hover:bg-slate-700 transition">
@@ -95,7 +95,7 @@
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
                         <h2 class="text-base font-bold">Cari Katalog Buku</h2>
                         <button onclick="openModalBuku()" class="admin-only bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition">
-                            + Tambah Buku (Create)
+                            + Tambah Buku (Create)[cite: 1]
                         </button>
                     </div>
 
@@ -115,7 +115,7 @@
             <!-- TAB 2: TRANSAKSI PEMINJAMAN -->
             <div id="tab-content-pinjaman" class="tab-content hidden space-y-4">
                 <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
-                    <h2 class="text-base font-bold mb-4">Form Peminjaman Buku (Cek Stok)</h2>
+                    <h2 class="text-base font-bold mb-4">Form Peminjaman Buku (Cek Stok)[cite: 1]</h2>
                     
                     <form onsubmit="handleProsesPinjam(event)" class="space-y-4 max-w-xl">
                         <div>
@@ -145,13 +145,12 @@
                         </div>
 
                         <div class="p-3 bg-blue-950/40 border border-blue-800/50 rounded-lg text-xs text-blue-300">
-                            ℹ️ Sistem akan memotong stok otomatis: (stok = stok - 1)
+                            ℹ️ Sistem akan memotong stok otomatis: (stok = stok - 1)[cite: 1]
                         </div>
 
-                        <button type="submit" class="admin-only w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2.5 rounded-lg text-sm transition">
-                            💾 SIMPAN TRANSAKSI & CETAK BUKTI PINJAM
+                        <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2.5 rounded-lg text-sm transition">
+                            💾 SIMPAN TRANSAKSI & CETAK BUKTI PINJAM[cite: 1]
                         </button>
-                        <p class="siswa-only text-xs text-yellow-500 italic text-center">⚠️ Transaksi peminjaman hanya dapat diproses oleh Admin.</p>
                     </form>
                 </div>
             </div>
@@ -159,7 +158,7 @@
             <!-- TAB 3: PENGEMBALIAN BUKU & DENDA -->
             <div id="tab-content-pengembalian" class="tab-content hidden space-y-4">
                 <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
-                    <h2 class="text-base font-bold mb-4">Form Pengembalian & Kalkulasi Denda</h2>
+                    <h2 class="text-base font-bold mb-4">Form Pengembalian & Kalkulasi Denda[cite: 1]</h2>
 
                     <div class="space-y-4 max-w-xl">
                         <div>
@@ -179,10 +178,9 @@
                             <!-- Hasil diisi JS -->
                         </div>
 
-                        <button onclick="prosesPengembalianBuku()" class="admin-only w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-lg text-sm transition shadow-lg">
-                            ✔ UPDATE STATUS & SIMPAN PEMBAYARAN DENDA
+                        <button onclick="prosesPengembalianBuku()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-lg text-sm transition shadow-lg">
+                            ✔ UPDATE STATUS & SIMPAN PEMBAYARAN DENDA[cite: 1]
                         </button>
-                        <p class="siswa-only text-xs text-yellow-500 italic text-center">⚠️ Proses pengembalian hanya dapat dilakukan oleh Admin.</p>
                     </div>
                 </div>
             </div>
@@ -191,9 +189,9 @@
             <div id="tab-content-anggota" class="tab-content hidden space-y-4">
                 <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
                     <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-base font-bold">Data Master Anggota (`tbl-user`)</h2>
+                        <h2 class="text-base font-bold">Data Master Anggota (`tbl-user`)[cite: 1]</h2>
                         <button onclick="openModalAnggota()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition">
-                            + Tambah Anggota
+                            + Tambah Anggota[cite: 1]
                         </button>
                     </div>
 
@@ -221,9 +219,9 @@
             <div id="tab-content-laporan" class="tab-content hidden space-y-4">
                 <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl space-y-6">
                     <div class="flex justify-between items-center">
-                        <h2 class="text-base font-bold">ASTOA PERPUSTAKAAN - LAPORAN & REKAP DENDA</h2>
+                        <h2 class="text-base font-bold">ASTOA PERPUSTAKAAN - LAPORAN & REKAP DENDA[cite: 1]</h2>
                         <button onclick="window.print()" class="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-lg text-xs font-semibold transition">
-                            🖨️ Cetak PDF / Laporan
+                            🖨️ Cetak PDF / Laporan[cite: 1]
                         </button>
                     </div>
 
@@ -231,15 +229,15 @@
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
                             <span class="text-xs text-slate-400 block">Total Peminjaman</span>
-                            <span id="stat-total-pinjam" class="text-xl font-extrabold text-slate-100">0</span> Transaksi
+                            <span id="stat-total-pinjam" class="text-xl font-extrabold text-slate-100">0</span> Transaksi[cite: 1]
                         </div>
                         <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
                             <span class="text-xs text-slate-400 block">Total Pengembalian</span>
-                            <span id="stat-total-kembali" class="text-xl font-extrabold text-slate-100">0</span> Transaksi
+                            <span id="stat-total-kembali" class="text-xl font-extrabold text-slate-100">0</span> Transaksi[cite: 1]
                         </div>
                         <div class="bg-slate-900 p-4 rounded-xl border border-red-800/60 bg-red-950/20">
                             <span class="text-xs text-red-400 block">Total Denda Terkumpul</span>
-                            <span id="stat-total-denda" class="text-xl font-extrabold text-red-400">Rp 0</span>
+                            <span id="stat-total-denda" class="text-xl font-extrabold text-red-400">Rp 0</span>[cite: 1]
                         </div>
                     </div>
                 </div>
@@ -310,7 +308,7 @@
 
     <!-- Footer -->
     <footer class="text-center py-4 text-xs text-slate-500 border-t border-slate-800 mt-8">
-        LKPD Sistem Informasi Perpustakaan &copy; 2026 - Dewi Lusiana (XII RPL 3)
+        LKPD Sistem Informasi Perpustakaan &copy; 2026 - Dewi Lusiana (XII RPL 3)[cite: 1]
     </footer>
 
     <!-- LOGIKA JAVASCRIPT APLIKASI -->
@@ -359,12 +357,12 @@
                 document.getElementById('current-name').innerText = currentUser.nama_lengkap;
                 document.getElementById('current-role-badge').innerText = currentUser.role;
 
+                // Batasi Akses Sesuai Role (Admin vs Siswa)[cite: 1]
                 if (currentUser.role === 'Siswa') {
                     document.querySelectorAll('.admin-only').forEach(el => el.classList.add('hidden'));
-                    document.querySelectorAll('.siswa-only').forEach(el => el.classList.remove('hidden'));
+                    switchTab('katalog'); // Siswa langsung diarahkan ke katalog
                 } else {
                     document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
-                    document.querySelectorAll('.siswa-only').forEach(el => el.classList.add('hidden'));
                 }
 
                 initDropdowns();
@@ -507,7 +505,7 @@
             };
 
             dbPeminjaman.push(trxBaru);
-            alert(`✅ Transaksi Berhasil! Stok buku otomatis berkurang (stok = stok - 1).`);
+            alert(`✅ Transaksi Berhasil! Stok buku otomatis berkurang (stok = stok - 1)[cite: 1].`);
             initDropdowns();
             renderKatalog();
             renderTabelLaporan();
@@ -548,8 +546,8 @@
                 panel.className = "p-4 rounded-xl border border-red-800 bg-red-950/80 flex justify-between items-center";
                 panel.innerHTML = `
                     <div>
-                        <p class="text-xs font-bold text-red-400">⚠️ Status Keterlambatan: TERLAMBAT (${diffDays} Hari)</p>
-                        <p class="text-[11px] text-slate-400">Rumus: Selisih Hari (${diffDays}) × Tarif Denda/Hari (Rp 1.000)</p>
+                        <p class="text-xs font-bold text-red-400">⚠️ Status Keterlambatan: TERLAMBAT (${diffDays} Hari)[cite: 1]</p>
+                        <p class="text-[11px] text-slate-400">Rumus: Selisih Hari (${diffDays}) × Tarif Denda/Hari (Rp 1.000)[cite: 1]</p>
                     </div>
                     <div class="text-lg font-black text-red-300">Rp ${totalDenda.toLocaleString('id-ID')}</div>
                 `;
@@ -646,9 +644,9 @@
             let totalKembali = dbPeminjaman.filter(t => t.tgl_kembali !== null).length;
             let totalDenda = dbPeminjaman.reduce((acc, curr) => acc + curr.denda, 0);
 
-            document.getElementById('stat-total-pinjam').innerText = `${totalPinjam} Transaksi`;
-            document.getElementById('stat-total-kembali').innerText = `${totalKembali} Transaksi`;
-            document.getElementById('stat-total-denda').innerText = `Rp ${totalDenda.toLocaleString('id-ID')}`;
+            document.getElementById('stat-total-pinjam').innerText = `${totalPinjam} Transaksi[cite: 1]`;
+            document.getElementById('stat-total-kembali').innerText = `${totalKembali} Transaksi[cite: 1]`;
+            document.getElementById('stat-total-denda').innerText = `Rp ${totalDenda.toLocaleString('id-ID')}[cite: 1]`;
         }
     </script>
 </body>
