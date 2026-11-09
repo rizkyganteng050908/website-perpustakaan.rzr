@@ -36,6 +36,14 @@
     </script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- SheetJS untuk Export Excel -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+    <!-- jsPDF & AutoTable untuk Export PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
@@ -128,6 +136,108 @@
             return new Date(dateStr).toLocaleDateString('id-ID', options);
         }
 
+        // --- EXPORT FUNCTIONS ---
+        function exportLaporanExcel() {
+            const dataExcel = state.peminjaman.map((p, index) => {
+                const user = state.users.find(u => u.id === p.idUser) || { nama: p.idUser };
+                const buku = state.buku.find(b => b.id === p.idBuku) || { judul: p.idBuku };
+                
+                return {
+                    "No": index + 1,
+                    "ID Transaksi": p.id,
+                    "ID Anggota": p.idUser,
+                    "Nama Peminjam": user.nama,
+                    "ID Buku": p.idBuku,
+                    "Judul Buku": buku.judul,
+                    "Tanggal Pinjam": formatDate(p.tglPinjam),
+                    "Jatuh Tempo": formatDate(p.tglKembali),
+                    "Tanggal Kembali": p.tglDikembalikan ? formatDate(p.tglDikembalikan) : '-',
+                    "Status": p.status,
+                    "Denda (Rp)": p.denda || 0
+                };
+            });
+
+            const worksheet = XLSX.utils.json_to_sheet(dataExcel);
+            worksheet['!cols'] = [
+                { wch: 5 },  { wch: 15 }, { wch: 12 }, { wch: 25 }, 
+                { wch: 12 }, { wch: 30 }, { wch: 15 }, { wch: 15 }, 
+                { wch: 15 }, { wch: 12 }, { wch: 15 }
+            ];
+
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Laporan Peminjaman");
+
+            const fileName = `Laporan_Perpustakaan_${new Date().toISOString().split('T')[0]}.xlsx`;
+            XLSX.writeFile(workbook, fileName);
+        }
+
+        function exportLaporanPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('landscape', 'mm', 'a4');
+
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(16);
+            doc.setTextColor(16, 42, 67);
+            doc.text("LAPORAN REKAPITULASI PEMINJAMAN BUKU", 14, 15);
+
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(10);
+            doc.setTextColor(100);
+            doc.text(`ASTOA Perpustakaan Digital  |  Tanggal Cetak: ${new Date().toLocaleDateString('id-ID')}`, 14, 21);
+
+            doc.setLineWidth(0.5);
+            doc.setDrawColor(200, 200, 200);
+            doc.line(14, 24, 283, 24);
+
+            const tableColumn = ["No", "ID Trx", "Peminjam", "Judul Buku", "Tgl Pinjam", "Jatuh Tempo", "Status", "Denda"];
+            const tableRows = state.peminjaman.map((p, index) => {
+                const user = state.users.find(u => u.id === p.idUser) || { nama: p.idUser };
+                const buku = state.buku.find(b => b.id === p.idBuku) || { judul: p.idBuku };
+                return [
+                    index + 1,
+                    p.id,
+                    `${user.nama} (${p.idUser})`,
+                    buku.judul,
+                    formatDate(p.tglPinjam),
+                    formatDate(p.tglKembali),
+                    p.status,
+                    `Rp ${(p.denda || 0).toLocaleString()}`
+                ];
+            });
+
+            doc.autoTable({
+                startY: 28,
+                head: [tableColumn],
+                body: tableRows,
+                theme: 'striped',
+                headStyles: { 
+                    fillColor: [30, 58, 138], 
+                    textColor: 255, 
+                    fontStyle: 'bold',
+                    halign: 'left'
+                },
+                styles: { fontSize: 9, cellPadding: 3 },
+                columnStyles: {
+                    0: { cellWidth: 12 },
+                    1: { cellWidth: 25 },
+                    2: { cellWidth: 55 },
+                    3: { cellWidth: 70 },
+                    4: { cellWidth: 28 },
+                    5: { cellWidth: 28 },
+                    6: { cellWidth: 25 },
+                    7: { cellWidth: 26, halign: 'right' }
+                },
+                didDrawPage: function (data) {
+                    const pageCount = doc.internal.getNumberOfPages();
+                    doc.setFontSize(8);
+                    doc.setTextColor(150);
+                    doc.text(`Halaman ${data.pageNumber} dari ${pageCount}`, data.settings.margin.left, doc.internal.pageSize.height - 10);
+                }
+            });
+
+            doc.save(`Laporan_Perpustakaan_${new Date().toISOString().split('T')[0]}.pdf`);
+        }
+
         // --- RENDER FUNCTIONS ---
         function render() {
             const app = document.getElementById('app');
@@ -146,13 +256,12 @@
             attachEvents();
         }
 
-        // --- 1. FIXED LOGIN PAGE VIEW ---
+        // LOGIN PAGE VIEW
         function renderLogin() {
             return `
             <div class="min-h-screen bg-gradient-to-br from-navy-950 via-navy-900 to-brand-blue flex flex-col justify-center items-center p-4">
                 <div class="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-100 transition-all duration-300">
                     
-                    <!-- Header -->
                     <div class="bg-gradient-to-r from-navy-900 to-brand-blue p-8 text-center text-white relative">
                         <div class="inline-flex items-center justify-center w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl mb-3 border border-white/20 shadow-inner">
                             <i data-lucide="book-open-check" class="w-8 h-8 text-amber-400"></i>
@@ -161,7 +270,6 @@
                         <p class="text-xs text-navy-200 mt-1 uppercase tracking-wider font-semibold">Sistem Informasi Perpustakaan Sekolah</p>
                     </div>
 
-                    <!-- Form Login -->
                     <div class="p-8">
                         ${state.loginError ? `
                             <div class="mb-5 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold flex items-center gap-2">
@@ -198,7 +306,6 @@
                             </button>
                         </form>
 
-                        <!-- Quick Demo Section -->
                         <div class="mt-8 pt-6 border-t border-slate-100 text-center">
                             <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-3">Akses Cepat Testing</span>
                             <div class="grid grid-cols-2 gap-2">
@@ -224,7 +331,7 @@
             `;
         }
 
-        // --- HEADER & LAYOUTS ---
+        // HEADER & LAYOUTS
         function renderHeader() {
             const isLogged = state.currentUser;
             return `
@@ -614,14 +721,23 @@
             return `
             <div class="space-y-6">
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-6 print-card">
-                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-200">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-200">
                         <div>
                             <h2 class="text-xl font-bold text-slate-900">LAPORAN REKAPITULASI PERPUSTAKAAN</h2>
-                            <p class="text-xs text-slate-500">ASTOA Perpustakaan — Diunduh pada: ${new Date().toLocaleDateString('id-ID')}</p>
+                            <p class="text-xs text-slate-500">ASTOA Perpustakaan — Tanggal: ${new Date().toLocaleDateString('id-ID')}</p>
                         </div>
-                        <button onclick="window.print()" class="no-print px-4 py-2 bg-navy-900 hover:bg-brand-blue text-white rounded-xl text-xs font-semibold flex items-center gap-2 shadow-md transition-all">
-                            <i data-lucide="printer" class="w-4 h-4"></i> Cetak PDF / Laporan
-                        </button>
+                        
+                        <div class="flex items-center gap-2 no-print flex-wrap">
+                            <button onclick="exportLaporanExcel()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 shadow-md transition-all">
+                                <i data-lucide="file-spreadsheet" class="w-4 h-4"></i> Ekspor Excel
+                            </button>
+                            <button onclick="exportLaporanPDF()" class="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 shadow-md transition-all">
+                                <i data-lucide="file-down" class="w-4 h-4"></i> Ekspor PDF Rapi
+                            </button>
+                            <button onclick="window.print()" class="px-3.5 py-2 bg-navy-900 hover:bg-brand-blue text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 shadow-md transition-all">
+                                <i data-lucide="printer" class="w-4 h-4"></i> Cetak Browser
+                            </button>
+                        </div>
                     </div>
 
                     <div class="grid grid-cols-3 gap-4 mb-6">
@@ -675,7 +791,7 @@
             `;
         }
 
-        // --- SISWA DASHBOARD ---
+        // SISWA DASHBOARD
         function renderSiswaLayout() {
             return `
             ${renderHeader()}
@@ -832,7 +948,7 @@
             `;
         }
 
-        // --- HANDLERS & LOGIC ---
+        // HANDLERS & LOGIC
         function setTab(tab) {
             state.activeTab = tab;
             render();
@@ -900,7 +1016,7 @@
             render();
         }
 
-        // --- EVENT ATTACHMENTS ---
+        // EVENT ATTACHMENTS
         function attachEvents() {
             const peminjamanForm = document.getElementById('peminjamanForm');
             if (peminjamanForm) {
